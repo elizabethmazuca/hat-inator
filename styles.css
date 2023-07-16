@@ -15,6 +15,8 @@ header {
     height: 150px;
     display: flex;
     align-items: center;
+    width: 100%;
+    justify-content: center;
 }
 
 /* svg {
@@ -44,6 +46,7 @@ input {
     padding: 10px;
     border-radius: 5px;
     box-shadow: rgb(38, 57, 77) 0 20px 30px -10px;
+    box-sizing: border-box; /* keeps box in the parent */
 }
 
 #submit-icon {
