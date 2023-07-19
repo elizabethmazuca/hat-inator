@@ -3,6 +3,7 @@ const API_KEY = "" //key (do not post bozo)
 
 const submitIcon = document.querySelector("#submit-icon") //like an event listener
 const inputElement = document.querySelector("input") //grabs user input
+const imageSection = document.querySelector('.images-section')
 
 const getImages = async () => { //asynch bc we are using await
     const options = {
@@ -13,7 +14,7 @@ const getImages = async () => { //asynch bc we are using await
         },
         body: JSON.stringify({
             "prompt": inputElement.value, //this might be where you add "wearing a hat"
-            "n":1, // one image generated
+            "n": 1, // one image generated
             "size": "1024x1024"
         })
     }
@@ -21,7 +22,16 @@ const getImages = async () => { //asynch bc we are using await
     try {
         const response = await fetch('https://api.openai.com/v1/images/generations', options)
         const data = await response.json()
-        console.log(data)
+        data?.data.forEach(imageObject => {
+
+            const ImageContainer = document.createElement('div')
+            ImageContainer.classList.add('image-container')
+            const imageElement = document.createElement('img')
+            imageElement.setAttribute('src', imageObject.url)
+            ImageContainer.append(imageElement)
+            imageSection.append(ImageContainer)
+        })
+
     } catch (error) {
         console.error(error)
     }
